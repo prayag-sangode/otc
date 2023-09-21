@@ -4,7 +4,7 @@ resource "opentelekomcloud_compute_keypair_v2" "ecs_vm-keypair" {
 }
 
 resource "opentelekomcloud_networking_secgroup_v2" "nc_ssh_ecs_vm_sg" {
-  name        = format("%s_ssh_sg", var.stage)
+  name        = var.stage
   description = "SSH Access to the ecs_vm"
 }
 
@@ -27,10 +27,10 @@ resource "opentelekomcloud_compute_instance_v2" "boot-from-volume" {
   image_id          = data.opentelekomcloud_images_image_v2.ecs_vm_image.id
   flavor_id         = var.flavor_id
   key_pair          = var.key_name
-  security_groups   = ["default", opentelekomcloud_networking_secgroup_v2.nc_ssh_ecs_vm_sg.name]
+  security_groups  = [opentelekomcloud_networking_secgroup_v2.nc_ssh_ecs_vm_sg.name]
   availability_zone = "eu-de-03"
   network {
-    uuid = opentelekomcloud_vpc_subnet_v1.public.id
+    uuid = var.network_id
   }
 
 

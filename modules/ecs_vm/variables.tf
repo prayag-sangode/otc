@@ -33,3 +33,9 @@ variable "image_name" {
   type        = string
 }
 
+variable "network_id" {
+  description = "Name of the image for the ECS VM"
+  type        = string
+}
+
+
