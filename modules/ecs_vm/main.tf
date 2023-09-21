@@ -29,6 +29,10 @@ resource "opentelekomcloud_compute_instance_v2" "boot-from-volume" {
   key_pair          = var.key_name
   security_groups   = ["default", opentelekomcloud_networking_secgroup_v2.nc_ssh_ecs_vm_sg.name]
   availability_zone = "eu-de-03"
+  network {
+    uuid = opentelekomcloud_vpc_subnet_v1.public.id
+  }
+
 
   block_device {
     uuid                  = data.opentelekomcloud_images_image_v2.ecs_vm_image.id
