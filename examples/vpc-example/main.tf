@@ -5,6 +5,3 @@ module "network" {
   public_cidr  = var.public_cidr
   private_cidr = var.private_cidr
 }
-output "network_id" {
-  value = module.network.network_id
-}
